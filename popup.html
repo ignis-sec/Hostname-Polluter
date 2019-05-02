@@ -1,15 +1,33 @@
 <!DOCTYPE html>
-  <html>
-    <head>
-    </head>
-    <body>
+<html>
+<head>
+	<script src="jquery.min.js"></script>
+	<script src="content.js"></script>
+	<style>
+		.btn{
+			height:25px;
+			border-radius:15px;
+			margin-top:5px;
+		}
+		.ext-enabled{
+		background:#1fa300;
+		border: solid 2px #28cc00
+		color:white;
+	}
+		.ext-disabled{
+		background:#bf0000;
+		border:solid 2px #9e0000;
+		color:white;
+	}
+	</style>
+</head>
+<body>
 
-<div style="width:350px; height:200px;">
-	<form>
-		<label> Hostname </label>
-		<input type="text">
-		<input type="button" value="Ok">
-	</form>
-</div>
-    </body>
-  </html>
+	<div style="width:350px">
+			<h3> Hostname </h3>
+			<input id="host-field" type="text" style="width:65%">
+			<button type="button" id="ok-btn" style="width:25%;background:#1fa300;color:white;border: solid 2px #28cc00; border-radius:5px">Ok</button>
+			<button class="btn ext-disabled" id="ext-btn">Enable</button>
+	</div>
+</body>
+</html>

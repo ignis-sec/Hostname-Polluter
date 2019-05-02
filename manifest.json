@@ -3,11 +3,14 @@
     "version": "1.0",
     "description": "Quick extension for changing hostname on http requests.",
     "manifest_version": 2,
+    "permissions": [
+          "<all_urls>","webRequest","webRequestBlocking"
+        ],
     "background": {
       "scripts": ["background.js"],
-      "persistent": false
+      "persistent": true
     },
-    "page_action": {
+    "browser_action": {
       "default_popup": "popup.html"
     },
     "content_scripts": [
