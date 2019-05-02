@@ -1,0 +1,6 @@
+{
+    "name": "Hostname changer",
+    "version": "1.0",
+    "description": "Quick extension for changing hostname on http requests.",
+    "manifest_version": 2
+}
