@@ -3,8 +3,21 @@
 var _active=false, _hostname="localhost";
 
 
+//find browser type
+if (typeof chrome !== "undefined")
+	if (typeof browser !== "undefined")
+		browserAgent = "Firefox";
+	else browserAgent = "Chrome";
+else
+	browserAgent = "Edge";
+
+if (browserAgent == "Chrome") 
+	client=chrome;
+else 
+	client=browser;
+
 //modify headers before sending using onBeforeSendHeaders hook
-chrome.webRequest.onBeforeSendHeaders.addListener(
+client.webRequest.onBeforeSendHeaders.addListener(
 	function(details) {
 			//if extension is disabled, do not modify anything
 			if(_active==false) return {requestHeaders: details.requestHeaders}
@@ -19,9 +32,7 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
 	["blocking", "requestHeaders"]
 );
 
-
-//connect to popup window
-chrome.extension.onConnect.addListener(function(port) {
+function handleConnection(port){
 	console.log("Connected .....");
 	port.postMessage({active:_active, host:_hostname})
 	port.onMessage.addListener(function(msg) {
@@ -29,4 +40,10 @@ chrome.extension.onConnect.addListener(function(port) {
         _hostname = msg.host;
         console.log(msg)
     });
-})
+}
+
+//connect to popup window
+if (browserAgent == "Chrome") 
+	chrome.extension.onConnect.addListener(handleConnection)
+else //firefox
+	browser.runtime.onConnect.addListener(handleConnection)

@@ -4,15 +4,31 @@ var _hostname = "localhost"
 var _active = false;
 var bReady = false;
 
+//find browser type
+if (typeof chrome !== "undefined")
+	if (typeof browser !== "undefined")
+		browserAgent = "Firefox";
+	else browserAgent = "Chrome";
+else
+	browserAgent = "Edge";
+
+
+
+
 //override console.log to write on background elements console
 console.log = function(txt){
 	port.postMessage({active:_active, host:_hostname, debug:txt});
 }
 
 //create pipe to communicate between popup and extension backend
-var port = chrome.extension.connect({
-	name: "Variable Highway for Polluter"
-});
+if (browserAgent == "Chrome")
+	var port = chrome.extension.connect({
+		name: "Variable Highway for Polluter"
+	});
+else //for firefox, idk about IE 
+	var port = browser.runtime.connect({
+		name: "Variable Highway for Polluter"
+	});
 
 //when there is a response from backend
 port.onMessage.addListener(function(msg){
