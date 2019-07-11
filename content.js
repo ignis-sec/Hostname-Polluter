@@ -47,7 +47,7 @@ function _extEnable(){
 	_active=true;
 	document.getElementById("ext-btn").classList.add("ext-enabled");
 	document.getElementById("ext-btn").classList.remove("ext-disabled");
-	document.getElementById("ext-btn").innerHTML = "Disable";
+	document.getElementById("ext-btn").innerHTML = "Enabled";
 }
 
 //manage variables and visuals for deactivation
@@ -56,7 +56,7 @@ function _extDisable(){
 	_active=false;
 	document.getElementById("ext-btn").classList.remove("ext-enabled");
 	document.getElementById("ext-btn").classList.add("ext-disabled");
-	document.getElementById("ext-btn").innerHTML = "Enable";
+	document.getElementById("ext-btn").innerHTML = "Disabled";
 }
 
 //do when extension button is clicked

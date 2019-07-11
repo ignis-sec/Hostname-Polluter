@@ -2,12 +2,16 @@
 <html>
 <head>
 	<style>
+		body{
+			background:#f0f7ff;
+			font-size:15px;
+		}
 		.btn{
 			height:40px;
-			border-radius:10px;
 			margin-top:5px;
 			color:white;
 			font-size: 15px;
+			width:100%;
 		}
 		.ext-enabled{
 			background:#1fa300;
@@ -17,18 +21,36 @@
 			background:#bf0000;
 			border:solid 2px #9e0000;
 		}
+		#ok-btn{
+			background:#1fa300;
+			color:white;
+			border: solid 2px #28cc00;
+			font-size:15px;
+			padding: 3px 10px 3px 10px;
+		}
+		#host-field{
+  			width:65%;
+  			border:none;
+  			/*border-radius:2px;
+  			border: solid 1px #ccc;*/
+  			padding:5px;
+		}
 	</style>
 </head>
 <body>
 
-	<div style="width:350px">
-		<h3> 
-			<h3> Hostname </h3>
-			<input id="host-field" type="text" value="localhost" style="width:65%">
-			<button type="button" id="ok-btn" style="width:25%;background:#1fa300;color:white;border: solid 2px #28cc00; border-radius:5px">Ok</button>
-			<button class="btn ext-disabled" id="ext-btn">Enable</button><br>
-			<a href="https://flameofignis.com" style="font-size:8px; color:#666"> https://flameofignis.com </a><br>
+	<div style="width:400px">
+		<h2 style="text-align:center"> Hostname I suck at naming stuff </h2>
+			<label> Hostname    </label>
+			<input id="host-field" type="text" value="localhost">
+			<button type="button" id="ok-btn" > Ok </button>
+			<br>
+			<button class="btn ext-disabled" id="ext-btn">Enable</button>
+			<br>
+			<a href="https://flameofignis.com" style="font-size:8px; color:#666"> https://flameofignis.com </a>
+			<br>
 			<a href="https://github.com/flameofignis" style="font-size:8px; color:#666"> https://github.com/flameofignis </a>
+			<h3 style="text-align:center"> Bottom Text </h3>
 	</div>
 	<script src="content.js"></script>
 </body>
