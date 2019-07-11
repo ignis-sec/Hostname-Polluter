@@ -1,37 +1,32 @@
-var _active="false", _hostname="localhost";
+
+//default values
+var _active=false, _hostname="localhost";
 
 
+//modify headers before sending using onBeforeSendHeaders hook
 chrome.webRequest.onBeforeSendHeaders.addListener(
-    function(details) {
-    	if(_active=="false"){return {requestHeaders: details.requestHeaders};}
-		details.requestHeaders.push({
-	        name: 'Host',
-	        value: _hostname
-	    });
-          return {requestHeaders: details.requestHeaders};
-    },
-
-    {urls: ["<all_urls>"]},
-    ["blocking", "requestHeaders"]
+	function(details) {
+			//if extension is disabled, do not modify anything
+			if(_active==false) return {requestHeaders: details.requestHeaders}
+			details.requestHeaders.push({
+				name: 'Host',
+				value: _hostname
+			});
+			return {requestHeaders: details.requestHeaders};
+		},
+	//metadata
+	{urls: ["<all_urls>"]},
+	["blocking", "requestHeaders"]
 );
 
 
-//chrome.webRequest.onBeforeRequest.addListener(
-
-
-
+//connect to popup window
 chrome.extension.onConnect.addListener(function(port) {
-      console.log("Connected .....");
-      port.postMessage(String(_active) + "," + _hostname)
-      port.onMessage.addListener(function(msg) {
-      		console.log(msg)
-           	var passed = msg.split("===");
-           	if(passed[0]==="active"){
-           		_active = passed[1]
-           	}else if(passed[0]==="host"){
-           		_hostname = passed[1]
-           	}
-        console.log(_active)
-        console.log(_hostname)
-      });
- })
+	console.log("Connected .....");
+	port.postMessage({active:_active, host:_hostname})
+	port.onMessage.addListener(function(msg) {
+		_active = msg.active;
+        _hostname = msg.host;
+        console.log(msg)
+    });
+})
